@@ -38,3 +38,24 @@ dotnet run --framework net10.0   # or net9.0 if 10 isn't installed
 - Implement the encryption algorithm in `Program.cs`.
 - Add tests/examples showing input → encrypted output.
 - Document the algorithm and its limitations once chosen.
+
+## TODO
+
+### File I/O Enhancements
+
+- [ ] Add menu option to load encrypted text from file
+  - Prompt user for file path
+  - Load encrypted text using `FileService.LoadEncryptedText()`
+  - Prompt for key file path or allow manual key entry
+  - Decrypt and display the loaded text
+- [ ] Add menu option to load key from file
+  - Prompt user for key file path
+  - Load key using `FileService.LoadKey()`
+  - Use loaded key for encryption/decryption operations
+
+### Algorithm Exploration
+
+- [ ] Research and implement Caesar cipher as an alternative encryption method
+  - Learn how Caesar cipher works (shift-based substitution)
+  - Compare with XOR encryption (strengths/weaknesses)
+  - Consider adding as a second encryption option in the program
