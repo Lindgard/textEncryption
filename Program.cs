@@ -44,8 +44,10 @@ class Program
                 break;
             }
 
-            if (byte.TryParse(keyText, out key))
+            var parsedKey = TryParseKey(keyText);
+            if (parsedKey.HasValue)
             {
+                key = parsedKey.Value;
                 break;
             }
 
