@@ -32,7 +32,11 @@
             if [ ! -f "$project" ]; then
               project="${self}/textEncryption.csproj"
             fi
-            exec dotnet run --project "$project" "$@"
+            framework="net10.0"
+            if ! dotnet --list-sdks | grep -q "^10\."; then
+              framework="net9.0"
+            fi
+            exec dotnet run --project "$project" --framework "$framework" "$@"
           '';
         };
       in {

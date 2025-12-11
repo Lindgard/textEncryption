@@ -22,13 +22,15 @@ With Nix (preferred; picks .NET 10 or falls back to 9):
 
 ```sh
 nix develop   # enter shell with the SDK
-dotnet run    # or nix run .#
+dotnet run --framework net10.0    # use net9.0 if net10.0 not available
+# or just:
+nix run .#   # auto-picks net10.0, falls back to net9.0
 ```
 
 With your locally installed .NET SDK:
 
 ```sh
-dotnet run
+dotnet run --framework net10.0   # or net9.0 if 10 isn't installed
 ```
 
 ### Next Steps
