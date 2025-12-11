@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 
 namespace textEncryption;
 
@@ -14,6 +15,7 @@ class Program
         var validator = new InputValidator();
         var encryptionService = new EncryptionService();
         var formatter = new DisplayFormatter();
+        var fileService = new FileService();
 
         //* Get validated inputs
         string input = validator.GetValidTextInput();
@@ -25,5 +27,32 @@ class Program
 
         //* Display results
         formatter.DisplayEncryptionResults(input, key, encrypted, decrypted);
+
+        //* Ask if user wants to save
+        Console.Write("\nSave encrypted text to file? (y/n): ");
+        var saveChoice = Console.ReadLine()?.ToLower();
+        if (saveChoice == "y" || saveChoice == "yes")
+        {
+            Console.WriteLine("Enter file path (e.g., 'encrypted.txt')");
+            var filePath = Console.ReadLine();
+            if (!string.IsNullOrWhiteSpace(filePath))
+            {
+                try
+                {
+                    fileService.SaveEncryptedText(encrypted, filePath);
+                    Console.ForegroundColor = ConsoleColor.DarkGreen;
+                    Console.WriteLine($"Encrypted text saved to: {filePath}");
+                    Console.ResetColor();
+                }
+                catch (Exception ex)
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine($"Error saving file: {ex.Message}");
+                    Console.ResetColor();
+                }
+            }
+        }
+
+        //* Ask if user wants to save key
     }
 }
