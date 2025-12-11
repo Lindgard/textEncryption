@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Runtime.CompilerServices;
 
 namespace textEncryption;
 
@@ -54,5 +55,28 @@ class Program
         }
 
         //* Ask if user wants to save key
+        Console.Write("Save key to file? (y/n): ");
+        var saveKeyChoice = Console.ReadLine()?.ToLower();
+        if (saveKeyChoice == "y" || saveKeyChoice == "yes")
+        {
+            Console.Write("Enter key file path (e.g., 'key.txt'): ");
+            var keyFilePath = Console.ReadLine();
+            if (!string.IsNullOrWhiteSpace(keyFilePath))
+            {
+                try
+                {
+                    fileService.SaveKey(key, keyFilePath);
+                    Console.ForegroundColor = ConsoleColor.DarkGreen;
+                    Console.WriteLine($"Key saved to: {keyFilePath}");
+                    Console.ResetColor();
+                }
+                catch (Exception ex)
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine($"Error saving key: {ex.Message}");
+                    Console.ResetColor();
+                }
+            }
+        }
     }
 }
