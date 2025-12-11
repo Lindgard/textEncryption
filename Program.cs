@@ -6,9 +6,19 @@ class Program
     static void Main(string[] args)
     {
         Console.WriteLine("== Bitwise Text Encryption Playground ==");
-        Console.WriteLine("Enter text to encrypt: ");
-        var input = Console.ReadLine() ?? string.Empty;
-
+        string input;
+        do{
+            Console.WriteLine("Enter text to encrypt: ");
+            input = Console.ReadLine() ?? string.Empty;
+            if (!string.IsNullOrEmpty(input))
+            {
+                break;
+            }
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("Error: Text cannot be empty. Please try again.");
+            Console.ResetColor();
+        } while (true); //* repeat until valid input
+        
         Console.Write("Enter key (0-255, defaults to 73): ");
         var keyText = Console.ReadLine();
         byte key = TryParseKey(keyText) ?? 73;
