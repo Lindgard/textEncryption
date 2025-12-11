@@ -14,12 +14,12 @@ class Program
         byte key = TryParseKey(keyText) ?? 73;
 
         Console.WriteLine($"\nYou entered: '{input}'");
-        console.WriteLine($"Key: {key}");
+        Console.WriteLine($"Key: {key}");
     }
 
     static byte? TryParseKey(string? keyText)
     {
-        if (byte.TryParse(text, out var key))
+        if (byte.TryParse(keyText, out var key))
             return key;
         return null;
     }
