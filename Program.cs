@@ -20,6 +20,7 @@ class Program
         Console.WriteLine($"Encrypted length: {encrypted.Length}");
         Console.WriteLine($"Encrypted bytes: {string.Join(",", encrypted.Select(c => (int)c))}");
         Console.WriteLine($"Encrypted: '{encrypted}'");
+        Console.WriteLine($"Encrypted (hex): {ToHexString(encrypted)}");
         Console.WriteLine($"Decrypted: '{Decrypt(encrypted, key)}'");
     }
 
@@ -43,5 +44,17 @@ class Program
     static string Decrypt(string text, byte key)
     {
         return Encrypt(text, key);
+    }
+
+    static string ToHexString(string text)
+    {
+        var hexParts = new List<string>();
+        foreach (char c in text)
+        {
+            int value = (int)c;
+            string hex = value.ToString("X2");
+            hexParts.Add(hex);
+        }
+        return string.Join(" ", hexParts);
     }
 }
