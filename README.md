@@ -59,3 +59,34 @@ dotnet run --framework net10.0   # or net9.0 if 10 isn't installed
   - Learn how Caesar cipher works (shift-based substitution)
   - Compare with XOR encryption (strengths/weaknesses)
   - Consider adding as a second encryption option in the program
+
+## Program Flow
+
+```mermaid
+flowchart TD
+    Start([Program Start]) --> DisplayTitle[Display Title]
+    DisplayTitle --> CreateServices[Create Service Instances]
+    CreateServices --> GetTextInput[Get Text Input from User]
+    GetTextInput --> ValidateText{Text Valid?}
+    ValidateText -->|No| ErrorText[Display Error]
+    ErrorText --> GetTextInput
+    ValidateText -->|Yes| CheckLength{Length > Max?}
+    CheckLength -->|Yes| TruncateText[Truncate to Max Length]
+    TruncateText --> GetKeyInput[Get Key Input from User]
+    CheckLength -->|No| GetKeyInput
+    GetKeyInput --> ValidateKey{Key Valid?}
+    ValidateKey -->|No| ErrorKey[Display Error]
+    ErrorKey --> GetKeyInput
+    ValidateKey -->|Yes| Encrypt[Encrypt Text with Key]
+    Encrypt --> Decrypt[Decrypt Encrypted Text]
+    Decrypt --> DisplayResults[Display Results]
+    DisplayResults --> AskSave{Save to File?}
+    AskSave -->|Yes| GetFilePath[Get File Path]
+    GetFilePath --> SaveFile[Save Encrypted Text]
+    SaveFile --> AskSaveKey{Save Key?}
+    AskSave -->|No| AskSaveKey
+    AskSaveKey -->|Yes| GetKeyPath[Get Key File Path]
+    GetKeyPath --> SaveKey[Save Key to File]
+    SaveKey --> End([End])
+    AskSaveKey -->|No| End
+```
