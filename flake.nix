@@ -28,7 +28,7 @@
           runtimeInputs = [ dotnetSdk ];
           text = ''
             set -euo pipefail
-            project="${PWD}/textEncryption.csproj"
+            project="$PWD/textEncryption.csproj"
             if [ ! -f "$project" ]; then
               project="${self}/textEncryption.csproj"
             fi
