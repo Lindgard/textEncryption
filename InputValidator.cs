@@ -54,6 +54,54 @@ public class InputValidator
         return key;
     }
 
+    public byte[] GetValidMultiByteKeyInput(EncryptionService encryptionService)
+    {
+        byte[] key;
+        while (true)
+        {
+            Console.Write("Enter key bytes (comma-separated, 0-255 each, e.g., '73,43,123): ");
+            var keyText = Console.ReadLine();
+
+            if (string.IsNullOrWhiteSpace(keyText))
+            {
+                //* Default to a simple multi-byte key
+                key = new byte[] { 73, 42, 100 };
+                Console.WriteLine($"Using default key: [{string.Join(", ", key)}]");
+                break;
+            }
+
+            //* Parse comma-separated values
+            var parts = keyText.Split(", ", StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
+            var keyList = new List<byte>();
+
+            bool isValid = true;
+            foreach (var part in parts)
+            {
+                var parsedKey = encryptionService.TryParseKey(part);
+                if (parsedKey.HasValue)
+                {
+                    keyList.Add(parsedKey.Value);
+                }
+                else
+                {
+                    isValid = false;
+                    break;
+                }
+            }
+
+            if (isValid && keyList.Count > 0)
+            {
+                key = keyList.ToArray();
+                break;
+            }
+
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("Error: Invalid key. Please enter comma-separated numbers between 0 and 255 (e.g. '73,42,100').");
+            Console.ResetColor();
+        }
+        return key;
+    }
+
     private string ValidateLength(string input)
     {
         if (input.Length > MAX_LENGTH)

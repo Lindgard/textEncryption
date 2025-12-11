@@ -17,7 +17,7 @@ class Program
 
         //* Get validated inputs
         string input = validator.GetValidTextInput();
-        byte key = validator.GetValidKeyInput(encryptionService);
+        byte[] key = validator.GetValidMultiByteKeyInput(encryptionService);
 
         //* Encrypt and Decrypt
         string encrypted = encryptionService.Encrypt(input, key);
