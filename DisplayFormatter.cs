@@ -7,7 +7,7 @@ public class DisplayFormatter
         var hexParts = new List<string>();
         foreach (char c in text)
         {
-            int value = (int)c;
+            int value = c;
             string hex = value.ToString("X2");
             hexParts.Add(hex);
         }
