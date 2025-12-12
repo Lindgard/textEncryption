@@ -3,7 +3,7 @@ namespace textEncryption;
 
 public class InputValidator
 {
-    private const int MAX_LENGTH = 50;
+    private const int MAX_LENGTH = 500;
 
     public string GetValidTextInput()
     {
