@@ -1,4 +1,3 @@
-using System;
 namespace textEncryption;
 
 public class InputValidator

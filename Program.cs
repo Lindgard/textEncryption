@@ -1,8 +1,4 @@
-﻿using System;
-using System.Diagnostics;
-using System.Runtime.CompilerServices;
-
-namespace textEncryption;
+﻿namespace textEncryption;
 
 class Program
 {
